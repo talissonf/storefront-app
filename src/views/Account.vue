@@ -1,5 +1,9 @@
 <template>
-  <div class="account">
-    <h1>Account</h1>
+  <div id="account">
+    <ec-account
+      @login="login"
+      :customer.sync="customer"
+    />
   </div>
 </template>
+<script src="./js/Account.js"></script>
