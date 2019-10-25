@@ -1,6 +1,5 @@
 import { i18n, nickname } from '@ecomplus/utils'
 import EcomPassport from '@ecomplus/passport-client'
-import EcAddressForm from '../EcAddressForm.vue'
 import EcAddresses from '../EcAddresses.vue'
 import EcAccountForm from '../EcAccountForm.vue'
 import EcIdentify from '../EcIdentify.vue'
@@ -20,7 +19,6 @@ export default {
   components: {
     EcIdentify,
     EcAddresses,
-    EcAddressForm,
     EcAccountForm,
     EcOrdersList
   },
