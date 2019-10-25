@@ -61,11 +61,13 @@ export default {
       set (customer) {
         this.$emit('update:customer', customer)
       }
+    },
+    nickname () {
+      return nickname(this.localCustomer)
     }
   },
 
   methods: {
-    nickname,
     i18n (label) {
       return i18n(this.dictionary[label])
     },
