@@ -85,13 +85,5 @@ export default {
         this.isUserIdentified = false
       }
     }
-  },
-
-  watch: {
-    isUserIdentified () {
-      if (this.isUserIdentified && this.ecomPassport.isLogged()) {
-        this.$emit('update:customer', this.localCustomer)
-      }
-    }
   }
 }
