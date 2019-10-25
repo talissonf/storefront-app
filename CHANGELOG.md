@@ -2,6 +2,76 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0-beta.20](https://github.com/ecomclub/storefront-app/compare/v1.0.0-beta.19...v1.0.0-beta.20) (2019-10-22)
+
+
+### Bug Fixes
+
+* **payments:** handle js client transaction promise reject ([ad9edbd](https://github.com/ecomclub/storefront-app/commit/ad9edbd))
+
+## [1.0.0-beta.19](https://github.com/ecomclub/storefront-app/compare/v1.0.0-beta.18...v1.0.0-beta.19) (2019-10-22)
+
+
+### Bug Fixes
+
+* **input-phone:** import br format with named import (fix include err) ([8932e2a](https://github.com/ecomclub/storefront-app/commit/8932e2a))
+* **list-payments:** remove empty customer props (prevent 400 error) ([5b3be13](https://github.com/ecomclub/storefront-app/commit/5b3be13))
+
+
+### Features
+
+* **payment-client:** explose _checkout with amount, items and customer ([f55a5ef](https://github.com/ecomclub/storefront-app/commit/f55a5ef))
+
+## [1.0.0-beta.18](https://github.com/ecomclub/storefront-app/compare/v1.0.0-beta.17...v1.0.0-beta.18) (2019-10-17)
+
+
+### Bug Fixes
+
+* **input-phone:** import br format on main ([57fd25a](https://github.com/ecomclub/storefront-app/commit/57fd25a))
+
+## [1.0.0-beta.17](https://github.com/ecomclub/storefront-app/compare/v1.0.0-beta.16...v1.0.0-beta.17) (2019-10-17)
+
+
+### Bug Fixes
+
+* **input-phone:** import br format before cleave component ([c1cbd12](https://github.com/ecomclub/storefront-app/commit/c1cbd12))
+
+## [1.0.0-beta.16](https://github.com/ecomclub/storefront-app/compare/v1.0.0-beta.15...v1.0.0-beta.16) (2019-10-17)
+
+
+### Bug Fixes
+
+* **payment:** ensure container html is updated when amoutn changes ([0c2031a](https://github.com/ecomclub/storefront-app/commit/0c2031a))
+* **payment-client:** repeat onload expression when it has container html ([4649d05](https://github.com/ecomclub/storefront-app/commit/4649d05))
+
+
+### Features
+
+* **payment-clients:** set global _amount object before onload exp ([e397a6b](https://github.com/ecomclub/storefront-app/commit/e397a6b))
+
+## [1.0.0-beta.15](https://github.com/ecomclub/storefront-app/compare/v1.0.0-beta.14...v1.0.0-beta.15) (2019-10-15)
+
+
+### Bug Fixes
+
+* **account:** logout after fetch customer 401 error ([bd34d3a](https://github.com/ecomclub/storefront-app/commit/bd34d3a))
+* **payment-client:** resolve promise after onload expression ([1d49c7b](https://github.com/ecomclub/storefront-app/commit/1d49c7b))
+* **payments:** fix handling gateways js clients ([99a08b5](https://github.com/ecomclub/storefront-app/commit/99a08b5))
+* **payments:** fix handling js client transaction promise ([b7822c8](https://github.com/ecomclub/storefront-app/commit/b7822c8))
+
+## [1.0.0-beta.14](https://github.com/ecomclub/storefront-app/compare/v1.0.0-beta.13...v1.0.0-beta.14) (2019-10-14)
+
+
+### Bug Fixes
+
+* **addresses:** start selecting address by zip code (if set) ([ba8baaf](https://github.com/ecomclub/storefront-app/commit/ba8baaf))
+
+
+### Features
+
+* **lib:** add load payment client script (function) ([079b794](https://github.com/ecomclub/storefront-app/commit/079b794))
+* **payments:** preload clients, treat transaction promise ([711e0bb](https://github.com/ecomclub/storefront-app/commit/711e0bb))
+
 ## [1.0.0-beta.13](https://github.com/ecomclub/storefront-app/compare/v1.0.0-beta.12...v1.0.0-beta.13) (2019-10-11)
 
 

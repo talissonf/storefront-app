@@ -1,5 +1,6 @@
 import { i18n, price, formatMoney } from '@ecomplus/utils'
 import { modules } from '@ecomplus/client'
+import loadPaymentClient from './../../lib/load-payment-client'
 import EcomCart from '@ecomplus/shopping-cart'
 import EcCreditCard from './../EcCreditCard.vue'
 import { FadeTransition, SlideYUpTransition } from 'vue2-transitions'
@@ -11,6 +12,8 @@ import {
   InterestFree,
   OfDiscount,
   OnFreight,
+  PaymentError,
+  PaymentErrorMsg,
   Total,
   UpTo
 } from './../../lib/i18n'
@@ -49,7 +52,8 @@ export default {
     return {
       waiting: false,
       paymentGateways: [],
-      selectedGateway: -1
+      selectedGateway: -1,
+      loadedClients: {}
     }
   },
 
@@ -62,14 +66,56 @@ export default {
         InterestFree,
         OfDiscount,
         OnFreight,
+        PaymentError,
+        PaymentErrorMsg,
         Total,
         UpTo,
         ...this.mergeDictionary
       }
     },
 
+    items () {
+      return this.cartItems || this.ecomCart.data.items
+    },
+
     paymentGateway () {
       return this.paymentGateways[this.selectedGateway] || {}
+    },
+
+    jsClient () {
+      return this.paymentGateway.js_client
+    },
+
+    jsClientLoad () {
+      const { amount, customer, items, loadedClients, selectedGateway } = this
+      if (amount.total) {
+        return loadedClients[selectedGateway].then(runOnloadExpression => {
+          if (this.$refs.gatewayContainer) {
+            this.$refs.gatewayContainer.innerHTML = this.jsClient.container_html
+          }
+          const payload = runOnloadExpression({ amount, customer, items })
+          const transactionPromise = this.jsClient.transaction_promise
+          if (transactionPromise && selectedGateway === this.selectedGateway) {
+            try {
+              window[transactionPromise]
+                .then(this.checkout)
+                .catch(err => {
+                  console.error(err)
+                  this.$bvToast.toast(this.i18n('PaymentErrorMsg'), {
+                    title: this.i18n('PaymentError'),
+                    variant: 'warning',
+                    solid: true
+                  })
+                })
+            } catch (err) {
+              console.error(err)
+            }
+          }
+          return payload
+        })
+      } else {
+        return Promise.resolve()
+      }
     },
 
     isCompany () {
@@ -116,16 +162,23 @@ export default {
 
     parsePaymentOptions (listResult = []) {
       this.paymentGateways = []
+      this.loadedClients = {}
       if (listResult.length) {
         listResult.forEach(appResult => {
           const { validated, error, response } = appResult
           if (validated && !error) {
             response.payment_gateways.forEach(gateway => {
-              this.paymentGateways.push({
+              const paymentGateway = {
                 app_id: appResult.app_id,
                 installment_option: this.installmentOption(gateway),
                 ...gateway
-              })
+              }
+              this.paymentGateways.push(paymentGateway)
+              const jsClient = paymentGateway.js_client
+              if (jsClient) {
+                const gatewayIndex = this.paymentGateways.length - 1
+                this.loadedClients[gatewayIndex] = loadPaymentClient(jsClient, true)
+              }
             })
           }
         })
@@ -135,7 +188,7 @@ export default {
     fetchPaymentGateways () {
       const url = '/list_payments.json'
       const method = 'POST'
-      const items = this.cartItems || this.ecomCart.data.items
+      const { items } = this
       const amount = this.amount ? { ...this.amount } : {}
       if (typeof amount.subtotal !== 'number') {
         amount.total = amount.subtotal = items
@@ -147,7 +200,20 @@ export default {
           amount.total -= amount.discount
         }
       }
-      const data = { items, amount }
+      const data = {
+        items,
+        amount,
+        domain: window.location.hostname
+      }
+      if (this.customer) {
+        data.customer = {}
+        for (const prop in this.customer) {
+          const val = this.customer[prop]
+          if (val && (typeof val !== 'object' || Object.keys(val).length)) {
+            data.customer[prop] = val
+          }
+        }
+      }
       this.waiting = true
       modules({ url, method, data })
         .then(({ data }) => this.parsePaymentOptions(data.result))
