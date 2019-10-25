@@ -1,4 +1,4 @@
-import { i18n } from '@ecomplus/utils'
+import { i18n, nickname } from '@ecomplus/utils'
 import EcomPassport from '@ecomplus/passport-client'
 import EcAddressForm from '../EcAddressForm.vue'
 import EcAddresses from '../EcAddresses.vue'
@@ -65,6 +65,7 @@ export default {
   },
 
   methods: {
+    nickname,
     i18n (label) {
       return i18n(this.dictionary[label])
     },
