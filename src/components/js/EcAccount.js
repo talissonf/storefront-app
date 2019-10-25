@@ -82,7 +82,7 @@ export default {
     logout () {
       this.ecomPassport.logout()
       if (!this.ecomPassport.isLogged()) {
-        window.location.reload()
+        this.isUserIdentified = false
       }
     }
   },
