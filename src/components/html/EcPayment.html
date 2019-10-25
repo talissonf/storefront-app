@@ -92,13 +92,23 @@
             v-html="paymentGateway.text"
           ></p>
 
+          <div
+            v-if="jsClient && jsClient.container_html"
+            :data-loaded="jsClientLoad.toString()"
+            :data-amount="JSON.stringify(amount)"
+            v-html="jsClient.container_html"
+            ref="gatewayContainer"
+          >
+          </div>
+
           <ec-credit-card
-            v-if="paymentGateway.payment_method.code === 'credit_card'"
+            v-else-if="paymentGateway.payment_method.code === 'credit_card'"
             :amount="amount"
             :checkHolder="customerName"
             :isCompany="isCompany"
             :installmentOptions="paymentGateway.installment_options"
-            :jsClient="paymentGateway.js_client"
+            :jsClient="jsClient"
+            :jsClientLoad="jsClientLoad"
             @checkout="checkout"
           />
 
