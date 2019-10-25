@@ -86,6 +86,16 @@ const actions = {
       .catch(err => {
         console.error(err)
       })
+  },
+
+  fetchOrdersList ({ commit }, { ecomPassport }) {
+    return ecomPassport.fetchOrdersList()
+      .then(data => {
+        commit('addOrder', data)
+      })
+      .catch(err => {
+        console.error(err)
+      })
   }
 }
 
