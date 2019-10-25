@@ -15,18 +15,18 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['customer', 'customerHasAddress']),
+    ...mapGetters(['customer']),
+
     customer: {
       get () {
         return this.$store.getters.customer
       },
       set (customer) {
-        console.log(customer)
         this.setCustomer(customer)
         if (customer._id) {
           const { ecomPassport } = this
           if (ecomPassport && ecomPassport.isAuthorized()) {
-            this.saveCustomer({ ecomPassport, customer })
+            this.saveCustomer({ ecomPassport })
           }
         }
       }
@@ -35,7 +35,9 @@ export default {
 
   methods: {
     ...mapMutations(['triggerLoading', 'setCustomer', 'setCustomerEmail']),
+
     ...mapActions(['fetchCustomer', 'saveCustomer']),
+
     login (ecomPassport) {
       this.ecomPassport = ecomPassport
       this.triggerLoading(true)
