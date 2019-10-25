@@ -23,7 +23,7 @@
   </div>
 
   <div key="login" v-else>
-    <ec-identify @login="login" @update="isUserIdentified = true" :customerEmail.sync="customerEmail" />
+    <ec-identify @login="login" :customerEmail.sync="customerEmail" />
   </div>
 
 </div>
