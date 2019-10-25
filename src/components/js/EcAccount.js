@@ -88,11 +88,9 @@ export default {
   },
 
   watch: {
-    customerEmail (email) {
-      if (email) {
-        this.localCustomer = this.customer
+    isUserIdentified () {
+      if (this.isUserIdentified && this.ecomPassport.isLogged()) {
         this.$emit('update:customer', this.localCustomer)
-        this.isUserIdentified = true
       }
     }
   }
