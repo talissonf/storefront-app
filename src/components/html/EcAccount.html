@@ -4,7 +4,7 @@
       <h2>{{ i18n('HelloAgain') + ' ' + localCustomer.display_name }}</h2>
       <small>
         {{ i18n('IsNotYou') + '?'}}
-        <a href="javascript:;" @click="logout" class="ec-account-logout">
+        <a href="#" @click.prevent="logout" class="ec-account-logout">
           {{ i18n('Logout') }}
         </a>
       </small>
