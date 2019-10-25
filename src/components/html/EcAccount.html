@@ -1,5 +1,5 @@
 <div class="ec-account">
-  <div v-if="isUserIdentified" class="ec-account-logged" key="account">
+  <div v-if="localCustomer._id" class="ec-account__logged" key="account">
     <div class="py-3">
       <h2>{{ i18n('HelloAgain') + ' ' + nickname }}</h2>
       <small>
