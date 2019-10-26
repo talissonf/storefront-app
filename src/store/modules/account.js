@@ -53,6 +53,10 @@ const mutations = {
 
   addOrder (state, order) {
     state.orders.push(order)
+  },
+
+  resetCustomer () {
+    state.customer = {}
   }
 }
 
