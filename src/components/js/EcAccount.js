@@ -34,13 +34,6 @@ export default {
     }
   },
 
-  data () {
-    return {
-      customerEmail: this.customer.main_email,
-      isUserIdentified: Boolean(this.customer.main_email)
-    }
-  },
-
   computed: {
     dictionary () {
       return {
@@ -60,6 +53,9 @@ export default {
         this.$emit('update:customer', customer)
       }
     },
+    customerEmail () {
+      return this.localCustomer.main_email
+    },
     nickname () {
       return nickname(this.localCustomer)
     }
@@ -78,9 +74,9 @@ export default {
     },
 
     logout () {
-      this.ecomPassport.logout()
-      if (!this.ecomPassport.isLogged()) {
-        this.isUserIdentified = false
+      if (this.ecomPassport.isLogged()) {
+        this.ecomPassport.logout()
+        this.$emit('logout')
       }
     }
   }
