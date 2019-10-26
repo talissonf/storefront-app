@@ -34,7 +34,7 @@ export default {
   },
 
   methods: {
-    ...mapMutations(['triggerLoading', 'setCustomer', 'setCustomerEmail']),
+    ...mapMutations(['triggerLoading', 'setCustomer', 'setCustomerEmail', 'resetCustomer']),
 
     ...mapActions(['fetchCustomer', 'saveCustomer']),
 
