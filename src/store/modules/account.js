@@ -1,25 +1,29 @@
-const state = {
-  customer: {
-    _id: '',
-    locale: '',
-    main_email: '',
-    accepts_marketing: false,
-    display_name: '',
-    name: {},
-    birth_date: {},
-    gender: '',
-    photos: [],
-    phones: [],
-    registry_type: 'p',
-    doc_country: '',
-    doc_number: '',
-    inscription_type: '',
-    inscription_number: '',
-    corporate_name: '',
-    addresses: []
-  },
-  orders: []
+const getDefaultState = () => {
+  return {
+    customer: {
+      _id: '',
+      locale: '',
+      main_email: '',
+      accepts_marketing: false,
+      display_name: '',
+      name: {},
+      birth_date: {},
+      gender: '',
+      photos: [],
+      phones: [],
+      registry_type: 'p',
+      doc_country: '',
+      doc_number: '',
+      inscription_type: '',
+      inscription_number: '',
+      corporate_name: '',
+      addresses: []
+    },
+    orders: []
+  }
 }
+
+const state = getDefaultState()
 
 const customerFields = Object.keys(state.customer)
 
@@ -56,7 +60,7 @@ const mutations = {
   },
 
   resetCustomer () {
-    state.customer = {}
+    Object.assign(state, getDefaultState())
   }
 }
 
